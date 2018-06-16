@@ -5,6 +5,8 @@
  */
 package economia;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Zayas
@@ -48,6 +50,7 @@ public class Monopolio extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Resultados = new javax.swing.JTextArea();
+        Regresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
@@ -123,6 +126,14 @@ public class Monopolio extends javax.swing.JFrame {
         Resultados.setRows(5);
         jScrollPane1.setViewportView(Resultados);
 
+        Regresar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Regresar.setText("Regresar a Menú");
+        Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegresarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,53 +143,52 @@ public class Monopolio extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addComponent(Regresar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
+                                        .addComponent(ValorUnoDx, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(ValorUnoDx, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(ValorDosDx, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel5))))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel11)
+                                        .addComponent(ValorDosDx, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel5))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(Calcular)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(Calcular)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(ValorUnoCT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jLabel8)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(ValorDosCT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(ValorUnoCT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(ValorTresCT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel8)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel10)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                                                .addComponent(ValorDosCT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(ValorTresCT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel10)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
@@ -217,7 +227,9 @@ public class Monopolio extends javax.swing.JFrame {
                         .addGap(0, 102, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(Regresar))
                 .addContainerGap())
         );
 
@@ -225,9 +237,7 @@ public class Monopolio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,6 +250,12 @@ public class Monopolio extends javax.swing.JFrame {
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
         contTextArea();
     }//GEN-LAST:event_CalcularActionPerformed
+
+    private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
+        MenuPrincipal menu=new MenuPrincipal();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_RegresarActionPerformed
     
     public void contTextArea(){
         //Despejamos Px de Dx
@@ -284,6 +300,85 @@ public class Monopolio extends javax.swing.JFrame {
         msjone+="Beneficio Máximo = "+String.format("%.2f",benmax);
         Resultados.setText(msjone);
     }
+    public ArrayList<Float> graficaCMg(){
+        ArrayList<Float> xcmg=new ArrayList();
+        xcmg.add(1f);
+        xcmg.add(2f);
+        xcmg.add(3f);
+        xcmg.add(4f);
+        xcmg.add(5f);
+        xcmg.add(6f);
+        xcmg.add(7f);
+        xcmg.add(8f);
+        xcmg.add(9f);
+        xcmg.add(10f);
+        for (int i = 0; i <= xcmg.size(); i++) {
+            float ycmg=Float.parseFloat(ValorDosCT.getText())+(Float.parseFloat(ValorTresCT.getText())*xcmg.get(i));
+        }
+        return xcmg;        
+    }
+    
+    public ArrayList<Float> graficaCP(){
+        ArrayList<Float> xcp=new ArrayList();
+        xcp.add(1f);
+        xcp.add(2f);
+        xcp.add(3f);
+        xcp.add(4f);
+        xcp.add(5f);
+        xcp.add(6f);
+        xcp.add(7f);
+        xcp.add(8f);
+        xcp.add(9f);
+        xcp.add(10f);
+        for (int i = 0; i <= xcp.size(); i++) {
+            float pot=(float) Math.pow(xcp.get(i),2);
+            float ct=(Float.parseFloat(ValorUnoCT.getText())+(Float.parseFloat(ValorDosCT.getText())*xcp.get(i))+(Float.parseFloat(ValorTresCT.getText())*pot));        
+            float ycp=ct/xcp.get(i);
+           }
+        return xcp;        
+    }
+    
+    public ArrayList<Float> graficaDx(){
+        ArrayList<Float> ydx=new ArrayList();
+        ydx.add(0f);
+        ydx.add(1f);
+        ydx.add(2f);
+        ydx.add(3f);
+        ydx.add(4f);
+        ydx.add(5f);
+        ydx.add(6f);
+        ydx.add(7f);
+        ydx.add(8f);
+        ydx.add(9f);
+        ydx.add(10f);
+        for (int i = 0; i <= ydx.size(); i++) {
+            float xdx=Float.parseFloat(ValorUnoDx.getText())-(Float.parseFloat(ValorDosDx.getText())*ydx.get(i));
+           }
+        return ydx;        
+    }
+    
+    public ArrayList<Float> graficaIMg(){
+        ArrayList<Float> yimg=new ArrayList();
+        yimg.add(0f);
+        yimg.add(1f);
+        yimg.add(2f);
+        yimg.add(3f);
+        yimg.add(4f);
+        yimg.add(5f);
+        yimg.add(6f);
+        yimg.add(7f);
+        yimg.add(8f);
+        yimg.add(9f);
+        yimg.add(10f);
+        for (int i = 0; i <= yimg.size(); i++) {
+            float unopx=(Float.parseFloat(ValorUnoDx.getText()))/(Float.parseFloat(ValorDosDx.getText()));
+            float dospx=1/(Float.parseFloat(ValorDosDx.getText()));
+            float dosval=dospx*2;        
+            float ximg=unopx-(dosval*yimg.get(i));
+          }
+        return yimg;        
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -318,6 +413,7 @@ public class Monopolio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Calcular;
+    private javax.swing.JButton Regresar;
     private javax.swing.JTextArea Resultados;
     private javax.swing.JTextField ValorDosCT;
     private javax.swing.JTextField ValorDosDx;
