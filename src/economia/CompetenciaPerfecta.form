@@ -409,6 +409,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Mostrar Gr&#xe1;fica"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GraficaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Regresar">
           <Properties>

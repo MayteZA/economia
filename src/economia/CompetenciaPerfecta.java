@@ -5,7 +5,15 @@
  */
 package economia;
 
+import java.awt.Panel;
 import java.util.*;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.*;
 
 /**
  *
@@ -158,6 +166,11 @@ public class CompetenciaPerfecta extends javax.swing.JFrame {
 
         Grafica.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Grafica.setText("Mostrar Gráfica");
+        Grafica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GraficaActionPerformed(evt);
+            }
+        });
 
         Regresar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Regresar.setText("Regresar a Menú");
@@ -331,6 +344,28 @@ public class CompetenciaPerfecta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_RegresarActionPerformed
 
+    private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficaActionPerformed
+        ArrayList<Double> CMg= this.graficaCMg();
+        ArrayList<Double> CP= this.graficaCP();
+        DefaultCategoryDataset Datos = new DefaultCategoryDataset();
+        for (int i = 0; i < CMg.size(); i++) {
+            Datos.addValue(CMg.get(i), "CMG", String.valueOf(i+1));
+        }
+        for (int i = 0; i < CP.size(); i++) {
+            Datos.addValue(CP.get(i), "CP", String.valueOf(i+1));
+        }
+       
+        JFreeChart Grafica = ChartFactory.createLineChart("Grafica","Qx", "Px", Datos,
+        PlotOrientation.VERTICAL, true, true, false);
+        ChartPanel Panel = new ChartPanel(Grafica);
+        JFrame Ventana = new JFrame("Grafica");
+        Ventana.getContentPane().add(Panel);
+        Ventana.pack();
+        Ventana.setVisible(true);
+        Ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+    }//GEN-LAST:event_GraficaActionPerformed
+
     public void contTextArea(){
         //Establecemos valor de IMg por igualdad
         String msjone="Dx = Px = IMg = IP\n";
@@ -366,52 +401,26 @@ public class CompetenciaPerfecta extends javax.swing.JFrame {
         Resultados.setText(msjone);
     }
     
-    public ArrayList<Float> graficaCMg(){
-        ArrayList<Float> xcmg=new ArrayList();
-        xcmg.add(1f);
-        xcmg.add(2f);
-        xcmg.add(3f);
-        xcmg.add(4f);
-        xcmg.add(5f);
-        xcmg.add(6f);
-        xcmg.add(7f);
-        xcmg.add(8f);
-        xcmg.add(9f);
-        xcmg.add(10f);
-        for (int i = 0; i <= xcmg.size(); i++) {
-            float ycmg=Float.parseFloat(ValorDosCT.getText())+(Float.parseFloat(ValorTresCT.getText())*xcmg.get(i));
+    public ArrayList<Double> graficaCMg(){
+        ArrayList<Double> xcmg=new ArrayList();
+        for (int i = 1; i < 50; i++) {
+            Double ycmg=Double.parseDouble(ValorDosCT.getText())+(Double.parseDouble(ValorTresCT.getText())*i);
+            xcmg.add(ycmg);
         }
         return xcmg;        
     }
     
-    public ArrayList<Float> graficaCP(){
-        ArrayList<Float> xcp=new ArrayList();
-        xcp.add(1f);
-        xcp.add(2f);
-        xcp.add(3f);
-        xcp.add(4f);
-        xcp.add(5f);
-        xcp.add(6f);
-        xcp.add(7f);
-        xcp.add(8f);
-        xcp.add(9f);
-        xcp.add(10f);
-        for (int i = 0; i <= xcp.size(); i++) {
-            float pot=(float) Math.pow(xcp.get(i),2);
-            float ct=(Float.parseFloat(ValorUnoCT.getText())+(Float.parseFloat(ValorDosCT.getText())*xcp.get(i))+(Float.parseFloat(ValorTresCT.getText())*pot));        
-            float ycp=ct/xcp.get(i);
+    public ArrayList<Double> graficaCP(){
+        ArrayList<Double> xcp=new ArrayList();
+        for (int i = 1; i < 50; i++) {
+            Double pot=(Double) Math.pow(i,2);
+            Double ct=(Double.parseDouble(ValorUnoCT.getText())+(Double.parseDouble(ValorDosCT.getText())*i)+(Double.parseDouble(ValorTresCT.getText())*pot));        
+            Double ycp=ct/i;
+            xcp.add(ycp);
            }
         return xcp;        
     }
        
-    /*public void graficar()
-    {
-        DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
-        List<Float> cmg = this.graficaCMg();
-        for (int i = 0; i < cmg.size(); i++) {
-            line_chart_dataset.addValue(cmg.get(i), "CMG", i+1+"");
-        }  
-    }*/
     /**
      * @param args the command line arguments
      */
