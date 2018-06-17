@@ -5,7 +5,16 @@
  */
 package economia;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.ValueMarker;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -121,6 +130,11 @@ public class Monopolio extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton2.setText("Mostrar Gráfica");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         Resultados.setColumns(20);
         Resultados.setRows(5);
@@ -256,6 +270,43 @@ public class Monopolio extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_RegresarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ArrayList<Double> CMg= this.graficaCMg();
+        ArrayList<Double> CP= this.graficaCP();
+        ArrayList<Double> DX= this.graficaDx();
+        ArrayList<Double> IMG= this.graficaIMg();
+        XYSeriesCollection ser = new XYSeriesCollection();
+        XYSeries Datoscmg = new XYSeries("CMG");
+        XYSeries Datoscp = new XYSeries("CP");
+        XYSeries Datosdx = new XYSeries("DX");
+        XYSeries Datosimg = new XYSeries("IMG");
+        
+        for (int i = 0; i < CMg.size(); i++) {
+            Datoscmg.add((i+1),CMg.get(i));
+        }
+        for (int i = 0; i < CP.size(); i++) {
+            Datoscp.add((i+1),CP.get(i));
+        }
+        for (int i = 0; i < DX.size(); i++) {
+            Datosdx.add((i+1),DX.get(i));
+        }
+        for (int i = 0; i < IMG.size(); i++) {
+            Datosimg.add((i+1),IMG.get(i));
+        }
+        ser.addSeries(Datoscmg); 
+        ser.addSeries(Datoscp);
+        ser.addSeries(Datosdx);
+        ser.addSeries(Datosimg);
+        JFreeChart Grafica = ChartFactory.createXYLineChart("Grafica","Qx", "Px", ser,
+        PlotOrientation.VERTICAL, true, true, false);
+        ChartPanel Panel = new ChartPanel(Grafica);
+        JFrame Ventana = new JFrame("Grafica");
+        Ventana.getContentPane().add(Panel);
+        Ventana.pack();
+        Ventana.setVisible(true);
+        Ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     public void contTextArea(){
         //Despejamos Px de Dx
@@ -300,81 +351,48 @@ public class Monopolio extends javax.swing.JFrame {
         msjone+="Beneficio Máximo = "+String.format("%.2f",benmax);
         Resultados.setText(msjone);
     }
-    public ArrayList<Float> graficaCMg(){
-        ArrayList<Float> xcmg=new ArrayList();
-        xcmg.add(1f);
-        xcmg.add(2f);
-        xcmg.add(3f);
-        xcmg.add(4f);
-        xcmg.add(5f);
-        xcmg.add(6f);
-        xcmg.add(7f);
-        xcmg.add(8f);
-        xcmg.add(9f);
-        xcmg.add(10f);
-        for (int i = 0; i <= xcmg.size(); i++) {
-            float ycmg=Float.parseFloat(ValorDosCT.getText())+(Float.parseFloat(ValorTresCT.getText())*xcmg.get(i));
+    public ArrayList<Double> graficaCMg(){
+        ArrayList<Double> xcmg=new ArrayList();
+        for (int i = 1; i < 16; i++) {
+            double ycmg=Double.parseDouble(ValorDosCT.getText())+(Double.parseDouble(ValorTresCT.getText())*i);
+            xcmg.add(ycmg);
         }
         return xcmg;        
     }
     
-    public ArrayList<Float> graficaCP(){
-        ArrayList<Float> xcp=new ArrayList();
-        xcp.add(1f);
-        xcp.add(2f);
-        xcp.add(3f);
-        xcp.add(4f);
-        xcp.add(5f);
-        xcp.add(6f);
-        xcp.add(7f);
-        xcp.add(8f);
-        xcp.add(9f);
-        xcp.add(10f);
-        for (int i = 0; i <= xcp.size(); i++) {
-            float pot=(float) Math.pow(xcp.get(i),2);
-            float ct=(Float.parseFloat(ValorUnoCT.getText())+(Float.parseFloat(ValorDosCT.getText())*xcp.get(i))+(Float.parseFloat(ValorTresCT.getText())*pot));        
-            float ycp=ct/xcp.get(i);
+    public ArrayList<Double> graficaCP(){
+        ArrayList<Double> xcp=new ArrayList();
+        for (int i = 1; i < 16; i++) {
+            double pot=(Double) Math.pow(i,2);
+            double ct=(Double.parseDouble(ValorUnoCT.getText())+(Float.parseFloat(ValorDosCT.getText())*i)+(Float.parseFloat(ValorTresCT.getText())*pot));        
+            double ycp=ct/i;
+            xcp.add(ycp);
            }
         return xcp;        
     }
     
-    public ArrayList<Float> graficaDx(){
-        ArrayList<Float> ydx=new ArrayList();
-        ydx.add(0f);
-        ydx.add(1f);
-        ydx.add(2f);
-        ydx.add(3f);
-        ydx.add(4f);
-        ydx.add(5f);
-        ydx.add(6f);
-        ydx.add(7f);
-        ydx.add(8f);
-        ydx.add(9f);
-        ydx.add(10f);
-        for (int i = 0; i <= ydx.size(); i++) {
-            float xdx=Float.parseFloat(ValorUnoDx.getText())-(Float.parseFloat(ValorDosDx.getText())*ydx.get(i));
+    public ArrayList<Double> graficaDx(){
+        ArrayList<Double> ydx=new ArrayList();
+        
+        for (int i = 0; i < 16; i++) {
+            double unopx=(Double.parseDouble(ValorUnoDx.getText()))/(Double.parseDouble(ValorDosDx.getText()));
+            double dospx=1/(Double.parseDouble(ValorDosDx.getText()));
+            double px=unopx-(dospx*i);
+            double xdx=Double.parseDouble(ValorUnoDx.getText())-(Double.parseDouble(ValorDosDx.getText())*px);
+            ydx.add(xdx);
            }
         return ydx;        
     }
     
-    public ArrayList<Float> graficaIMg(){
-        ArrayList<Float> yimg=new ArrayList();
-        yimg.add(0f);
-        yimg.add(1f);
-        yimg.add(2f);
-        yimg.add(3f);
-        yimg.add(4f);
-        yimg.add(5f);
-        yimg.add(6f);
-        yimg.add(7f);
-        yimg.add(8f);
-        yimg.add(9f);
-        yimg.add(10f);
-        for (int i = 0; i <= yimg.size(); i++) {
-            float unopx=(Float.parseFloat(ValorUnoDx.getText()))/(Float.parseFloat(ValorDosDx.getText()));
-            float dospx=1/(Float.parseFloat(ValorDosDx.getText()));
-            float dosval=dospx*2;        
-            float ximg=unopx-(dosval*yimg.get(i));
+    public ArrayList<Double> graficaIMg(){
+        ArrayList<Double> yimg=new ArrayList();
+        for (int i = 1; i < 16; i++) {
+            double unopx=(Double.parseDouble(ValorUnoDx.getText()))/(Double.parseDouble(ValorDosDx.getText()));
+            double dospx=1/(Double.parseDouble(ValorDosDx.getText()));
+            double dosval=dospx*2;        
+            double ximg=unopx-(dosval*i);
+            System.out.println(ximg);
+            yimg.add(ximg);
           }
         return yimg;        
     }
