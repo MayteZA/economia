@@ -349,28 +349,28 @@ public class CompetenciaPerfecta extends javax.swing.JFrame {
     private void GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficaActionPerformed
         ArrayList<Double> CMg= this.graficaCMg();
         ArrayList<Double> CP= this.graficaCP();
-        ArrayList<Double> PX= this.graficapx();
+        ;
         XYSeriesCollection ser = new XYSeriesCollection();
         XYSeries Datoscmg = new XYSeries("CMG");
         XYSeries Datoscp = new XYSeries("CP");
-        XYSeries Datospx = new XYSeries("PX");
-        for (int i = 0; i < CMg.size(); i++) {
+        for (int i =0; i < CMg.size(); i++) {
             Datoscmg.add((i+1),CMg.get(i));
         }
         for (int i = 0; i < CP.size(); i++) {
             Datoscp.add((i+1),CP.get(i));
         }
-        for (int i = 0; i < PX.size(); i++) {
-            Datospx.add((i+1),PX.get(i));
-        }
         ser.addSeries(Datoscmg); 
         ser.addSeries(Datoscp);
-        ser.addSeries(Datospx);
+        
         ValueMarker pointer = new ValueMarker(this.graficaqx().get(0));
         pointer.setPaint(Color.YELLOW);
+        ValueMarker pointer1 = new ValueMarker(this.graficapx().get(0));
+        pointer1.setPaint(Color.BLACK);
+        
         JFreeChart Grafica = ChartFactory.createXYLineChart("Grafica","Qx", "Px", ser,
         PlotOrientation.VERTICAL, true, true, false);
         Grafica.getXYPlot().addDomainMarker(pointer);
+        Grafica.getXYPlot().addRangeMarker(pointer1);
         ChartPanel Panel = new ChartPanel(Grafica);
         JFrame Ventana = new JFrame("Grafica");
         Ventana.getContentPane().add(Panel);
@@ -417,7 +417,7 @@ public class CompetenciaPerfecta extends javax.swing.JFrame {
     
     public ArrayList<Double> graficaCMg(){
         ArrayList<Double> xcmg=new ArrayList();
-        for (int i = 1; i < 15; i++) {
+        for (int i = 1; i < 20; i+=1) {
             Double valdos=(Double.parseDouble(ValorTresCT.getText())*2);
             Double ycmg=Double.parseDouble(ValorDosCT.getText())+(valdos*i);
             xcmg.add(ycmg);
@@ -428,7 +428,7 @@ public class CompetenciaPerfecta extends javax.swing.JFrame {
     
     public ArrayList<Double> graficaCP(){
         ArrayList<Double> xcp=new ArrayList();
-        for (int i = 1; i < 15; i++) {
+        for (int i = 1; i < 20; i+=1) {
             Double pot=(Double) Math.pow(i,2);
             Double ct=(Double.parseDouble(ValorUnoCT.getText())+(Double.parseDouble(ValorDosCT.getText())*i)+(Double.parseDouble(ValorTresCT.getText())*pot));        
             Double ycp=ct/i;
@@ -441,7 +441,7 @@ public class CompetenciaPerfecta extends javax.swing.JFrame {
     public ArrayList<Double> graficaqx(){
         
         ArrayList<Double> xcp=new ArrayList();
-        for (int i = 1; i < 15; i++) {
+        for (int i = 1; i < 20; i+=1) {
             double valdos=(Double.parseDouble(ValorTresCT.getText())*2);
             double numqx=Double.parseDouble(ValorUnoDx.getText())-Double.parseDouble(ValorDosCT.getText());
             double denqx=valdos+Double.parseDouble(ValorDosDx.getText());
@@ -454,7 +454,7 @@ public class CompetenciaPerfecta extends javax.swing.JFrame {
     public ArrayList<Double> graficapx(){
         
         ArrayList<Double> xcp=new ArrayList();
-        for (int i = 1; i < 15; i++) {
+        for (int i = 1; i < 20; i+=1) {
             double valdos=(Double.parseDouble(ValorTresCT.getText())*2);
             double numqx=Double.parseDouble(ValorUnoDx.getText())-Double.parseDouble(ValorDosCT.getText());
             double denqx=valdos+Double.parseDouble(ValorDosDx.getText());

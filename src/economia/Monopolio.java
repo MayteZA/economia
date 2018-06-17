@@ -282,25 +282,47 @@ public class Monopolio extends javax.swing.JFrame {
         XYSeries Datosdx = new XYSeries("DX");
         XYSeries Datosimg = new XYSeries("IMG");
         
-        for (int i = 0; i < CMg.size(); i++) {
+        for (int i = 1; i < CMg.size(); i++) {
             Datoscmg.add((i+1),CMg.get(i));
         }
-        for (int i = 0; i < CP.size(); i++) {
+        for (int i = 1; i < CP.size(); i++) {
             Datoscp.add((i+1),CP.get(i));
         }
         for (int i = 0; i < DX.size(); i++) {
-            Datosdx.add((i+1),DX.get(i));
+            Datosdx.add((i),DX.get(i));
         }
         for (int i = 0; i < IMG.size(); i++) {
-            Datosimg.add((i+1),IMG.get(i));
+            Datosimg.add((i),IMG.get(i));
         }
         ser.addSeries(Datoscmg); 
         ser.addSeries(Datoscp);
         ser.addSeries(Datosdx);
         ser.addSeries(Datosimg);
+        
+        
+        
+        
+        double unopx=(Double.parseDouble(ValorUnoDx.getText()))/(Double.parseDouble(ValorDosDx.getText()));
+        double dospx=1/(Double.parseDouble(ValorDosDx.getText()));
+        double numqx=unopx-Double.parseDouble(ValorDosCT.getText());
+        double dosval=dospx*2;   
+        double valdos=(Float.parseFloat(ValorTresCT.getText())*2);
+        double denqx=valdos+dosval;
+        double qx=numqx/denqx;
+        double px=unopx-(dospx*qx);
+        
+        ValueMarker mqx = new ValueMarker(qx);
+        mqx.setPaint(Color.BLACK);
+        mqx.setAlpha(1);
+        ValueMarker mpx = new ValueMarker(px);
+        mpx.setPaint(Color.MAGENTA);
+        mpx.setAlpha(1);
+        
         JFreeChart Grafica = ChartFactory.createXYLineChart("Grafica","Qx", "Px", ser,
         PlotOrientation.VERTICAL, true, true, false);
         ChartPanel Panel = new ChartPanel(Grafica);
+        Grafica.getXYPlot().addDomainMarker(mqx);
+        Grafica.getXYPlot().addRangeMarker(mpx);
         JFrame Ventana = new JFrame("Grafica");
         Ventana.getContentPane().add(Panel);
         Ventana.pack();
@@ -351,9 +373,10 @@ public class Monopolio extends javax.swing.JFrame {
         msjone+="Beneficio Máximo = "+String.format("%.2f",benmax);
         Resultados.setText(msjone);
     }
+    
     public ArrayList<Double> graficaCMg(){
         ArrayList<Double> xcmg=new ArrayList();
-        for (int i = 1; i < 16; i++) {
+        for (int i = 1; i < 100; i+=1) {
             double ycmg=Double.parseDouble(ValorDosCT.getText())+(Double.parseDouble(ValorTresCT.getText())*i);
             xcmg.add(ycmg);
         }
@@ -362,7 +385,7 @@ public class Monopolio extends javax.swing.JFrame {
     
     public ArrayList<Double> graficaCP(){
         ArrayList<Double> xcp=new ArrayList();
-        for (int i = 1; i < 16; i++) {
+        for (int i = 1; i < 100; i+=1) {
             double pot=(Double) Math.pow(i,2);
             double ct=(Double.parseDouble(ValorUnoCT.getText())+(Float.parseFloat(ValorDosCT.getText())*i)+(Float.parseFloat(ValorTresCT.getText())*pot));        
             double ycp=ct/i;
@@ -374,19 +397,18 @@ public class Monopolio extends javax.swing.JFrame {
     public ArrayList<Double> graficaDx(){
         ArrayList<Double> ydx=new ArrayList();
         
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 100; i+=1) {
             double unopx=(Double.parseDouble(ValorUnoDx.getText()))/(Double.parseDouble(ValorDosDx.getText()));
             double dospx=1/(Double.parseDouble(ValorDosDx.getText()));
-            double px=unopx-(dospx*i);
-            double xdx=Double.parseDouble(ValorUnoDx.getText())-(Double.parseDouble(ValorDosDx.getText())*px);
-            ydx.add(xdx);
+            double xpx=unopx-(dospx*i);
+            ydx.add(xpx);
            }
         return ydx;        
     }
     
     public ArrayList<Double> graficaIMg(){
         ArrayList<Double> yimg=new ArrayList();
-        for (int i = 1; i < 16; i++) {
+        for (int i = 0; i < 100; i+=1) {
             double unopx=(Double.parseDouble(ValorUnoDx.getText()))/(Double.parseDouble(ValorDosDx.getText()));
             double dospx=1/(Double.parseDouble(ValorDosDx.getText()));
             double dosval=dospx*2;        
