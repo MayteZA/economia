@@ -376,7 +376,7 @@ public class Monopolio extends javax.swing.JFrame {
     
     public ArrayList<Double> graficaCMg(){
         ArrayList<Double> xcmg=new ArrayList();
-        for (int i = 1; i < 100; i+=1) {
+        for (int i = 1; i < 200; i+=1) {
             double ycmg=Double.parseDouble(ValorDosCT.getText())+(Double.parseDouble(ValorTresCT.getText())*i);
             xcmg.add(ycmg);
         }
@@ -385,7 +385,7 @@ public class Monopolio extends javax.swing.JFrame {
     
     public ArrayList<Double> graficaCP(){
         ArrayList<Double> xcp=new ArrayList();
-        for (int i = 1; i < 100; i+=1) {
+        for (int i = 1; i < 200; i+=1) {
             double pot=(Double) Math.pow(i,2);
             double ct=(Double.parseDouble(ValorUnoCT.getText())+(Float.parseFloat(ValorDosCT.getText())*i)+(Float.parseFloat(ValorTresCT.getText())*pot));        
             double ycp=ct/i;
@@ -397,7 +397,7 @@ public class Monopolio extends javax.swing.JFrame {
     public ArrayList<Double> graficaDx(){
         ArrayList<Double> ydx=new ArrayList();
         
-        for (int i = 0; i < 100; i+=1) {
+        for (int i = 0; i < 200; i+=1) {
             double unopx=(Double.parseDouble(ValorUnoDx.getText()))/(Double.parseDouble(ValorDosDx.getText()));
             double dospx=1/(Double.parseDouble(ValorDosDx.getText()));
             double xpx=unopx-(dospx*i);
@@ -408,12 +408,11 @@ public class Monopolio extends javax.swing.JFrame {
     
     public ArrayList<Double> graficaIMg(){
         ArrayList<Double> yimg=new ArrayList();
-        for (int i = 0; i < 100; i+=1) {
+        for (int i = 0; i < 200; i+=1) {
             double unopx=(Double.parseDouble(ValorUnoDx.getText()))/(Double.parseDouble(ValorDosDx.getText()));
             double dospx=1/(Double.parseDouble(ValorDosDx.getText()));
             double dosval=dospx*2;        
             double ximg=unopx-(dosval*i);
-            System.out.println(ximg);
             yimg.add(ximg);
           }
         return yimg;        
